@@ -1,6 +1,33 @@
+# Logs and temporary files
 *.log
 *.tmp
+*.temp
+*.swp
+*.swo
+
+# macOS and editor artifacts
 .DS_Store
-vendor/
+Thumbs.db
+.idea/
+.vscode/
+
+# Local environment and secrets
 .env
+.env.*
+*.sqlite
+*.sqlite3
+
+# PHP/XAMPP local dependencies and build output
+vendor/
 node_modules/
+composer.lock
+
+# Local web server cache and session files
+sessions/
+cache/
+phpmyadmin/
+
+# Common project-specific generated files
+uploads/
+coverage/
+*.bak

@@ -1,49 +1,33 @@
-# Livestock Records System
+# Green Valley Farm
 
-A PHP/MySQL web application for managing a livestock farm's animal records, health tracking, inventory, and customer contact messages. The project combines a public-facing farm website with a login-protected management dashboard for staff and administrators.
+A PHP-based livestock records and farm management system for tracking animals, health records, inventory, messages, and reporting. The app is designed for local development with XAMPP and includes both a public-facing farm website and an internal admin/staff dashboard.
 
 ## Overview
 
-This system is designed for a farm operation that needs to:
+Green Valley Farm helps manage a livestock operation by organizing:
 
-- track animals and their status
-- record vaccinations, treatments, and checkups
-- manage feed, medicine, and equipment inventory
-- monitor low-stock levels
-- receive and review contact form submissions
-- generate filterable reports for operational management
-
-It is built for a local XAMPP development environment and uses plain PHP, MySQL, HTML, CSS, and JavaScript without a framework.
+- animal records and profiles
+- health and vaccination logs
+- feed, medicine, and equipment stock
+- low-stock alerts
+- contact submissions from site visitors
+- operational reports for staff and administrators
 
 ## Features
 
-### Public site
-
-- Home page
-- About page
-- Contact page with form validation
-- Responsive layout for desktop and mobile screens
-
-### Staff/admin dashboard
-
-- Login and registration
-- Dashboard with summary cards and recent activity
-- Animal CRUD operations
-- Health record management linked to animals
-- Inventory tracking with low-stock indicators
-- Filtered search and sorting
-- Role-based access control
-
-### Admin-only tools
-
-- Messages inbox for contact submissions
-- View and delete submitted inquiries
-- Reports page with filters and summary statistics
+- User registration and login
+- Role-based access for staff and admin users
+- Animal management with create, read, update, and delete actions
+- Health record tracking by animal
+- Inventory management with reorder thresholds
+- Contact form message management
+- Dashboard summary for activity and operational metrics
+- Responsive public pages for the farm website
 
 ## Tech Stack
 
-- PHP 8.x
-- MySQL / MariaDB
+- PHP
+- MySQL/MariaDB
 - Apache via XAMPP
 - HTML5
 - CSS3
@@ -58,60 +42,69 @@ livestock-records-system/
 ├── add_item.php
 ├── add_record.php
 ├── animals.php
-├── contact.php
+├── assets/
+├── CSS/
 ├── dashboard.php
 ├── edit_animal.php
 ├── edit_item.php
 ├── edit_record.php
 ├── health_records.php
-├── index.php
-├── inventory.php
-├── login.php
-├── logout.php
-├── messages.php
-├── register.php
-├── reports.php
-├── README.md
-├── assets/
-├── CSS/
 ├── includes/
 │   ├── auth_check.php
 │   └── db.php
+├── index.php
+├── inventory.php
 ├── JS/
 │   └── contact.js
-└── ...
+├── login.php
+├── logout.php
+├── messages.php
+├── README.md
+├── register.php
+├── reports.php
+└── .gitignore
 ```
 
 ## Prerequisites
 
-Before running the project, make sure you have:
+Before running the app locally, install and start:
 
-- XAMPP installed
-- Apache and MySQL started in XAMPP Control Panel
-- PHP enabled in local environment
-- A browser for testing the app
+- XAMPP or a similar PHP + MySQL environment
+- Apache
+- MySQL/MariaDB
+- A modern browser
 
 ## Local Setup
 
-1. Place the project folder inside your XAMPP `htdocs` directory.
+1. Place the project folder inside your web server root.
 
-    Example:
-
-    ```bash
-    C:/xampp/htdocs/livestock-records-system
-    ```
-
-    or on Linux:
+    For XAMPP on Linux:
 
     ```bash
     /opt/lampp/htdocs/livestock-records-system
     ```
 
-2. Start Apache and MySQL in XAMPP.
+2. Start Apache and MySQL from XAMPP.
 3. Open phpMyAdmin and create a database named `farm_db`.
-4. Create the required tables.
+4. Import or create the required tables for the app.
+5. Visit the app in the browser:
 
-### Database schema
+    ```text
+    http://localhost/livestock-records-system/
+    ```
+
+## Database Configuration
+
+The project connects to the database in `includes/db.php` using the default local configuration:
+
+- host: `localhost`
+- username: `root`
+- password: empty string
+- database: `farm_db`
+
+For a production deployment, replace this with a secure configuration and environment-based values.
+
+## Default Database Schema
 
 ```sql
 CREATE DATABASE IF NOT EXISTS farm_db;
@@ -175,70 +168,39 @@ CREATE TABLE messages (
 );
 ```
 
-## Database Configuration
-
-The app is configured in `includes/db.php` to connect using:
-
-- host: `localhost`
-- username: `root`
-- password: empty string
-- database: `farm_db`
-
-This is suitable for local development, but for production you should replace it with a safer configuration using a dedicated database user and environment variables.
-
-## Accessing the App
-
-After setup, open the project in a browser:
-
-- Public site: `http://localhost/livestock-records-system/`
-- Login page: `http://localhost/livestock-records-system/login.php`
-- Dashboard: `http://localhost/livestock-records-system/dashboard.php`
-
 ## User Roles
 
-The system supports two roles:
+The app supports:
 
-- `staff`: can manage animals, health records, and inventory
-- `admin`: has access to all staff features plus messages and reports
+- `staff`: can manage animals, record health information, and maintain inventory
+- `admin`: has access to all staff functionality plus messages and reports
 
-### Creating an admin account
-
-The registration page currently creates users with the default role `staff` on the server side. To grant admin access, either:
-
-- insert a user directly in the `users` table with role `admin`, or
-- update an existing user row in phpMyAdmin:
+To promote a user to admin, update the `users` table in phpMyAdmin:
 
 ```sql
 UPDATE users SET role = 'admin' WHERE email = 'your-email@example.com';
 ```
 
-## Usage Notes
+## Security Notes
 
-- Users must log in before accessing protected pages.
-- Protected pages are guarded by session checks.
-- The system uses prepared statements for database queries.
-- Passwords are hashed using PHP's `password_hash()` and verified with `password_verify()`.
-- Dynamic output is escaped using `htmlspecialchars()` to reduce XSS risk.
+- Passwords are hashed with PHP's password functions.
+- SQL queries use prepared statements where applicable.
+- User sessions are checked for protected pages.
+- Data displayed in the browser is escaped with `htmlspecialchars()`.
 
-## Known Notes
+## Notes
 
-- This project is intentionally built for local XAMPP use.
-- It does not include a full production-ready deployment setup.
-- Sensitive configuration should be moved out of the project for production deployment.
+This project is built for local development and demonstration use. It does not include a full production deployment setup, and database credentials should be adjusted before deployment to a live environment.
 
 ## License
 
-This project is for educational and local development use unless otherwise specified by the owner.
+This project is intended for local educational and development use unless otherwise specified by the project owner.
 
 ## Contributing
 
-If you want to extend the project:
+To extend the project:
 
 - keep validation and sanitization in place
-- use prepared statements for new queries
-- preserve the role-based access model
-- test forms and CRUD flows before pushing changes
-
-## Summary
-
-This project is a complete farm management system built around daily livestock operations, offering a practical balance of public information pages and internal record management. It is ideal for local development, demos, coursework, or a base for a larger farm system.
+- maintain the role-based access rules
+- write secure SQL queries
+- test CRUD flows before creating a pull request
