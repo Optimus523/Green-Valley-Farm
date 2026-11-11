@@ -41,6 +41,7 @@
         <section class="home-about">
             <div class="container">
             <h2>Who We Are</h2>
+            <img src="assets/about.jpg" alt="Cattle grazing at Green Valley Farm" class="about-image">
             <p>
                 Located in the heart of Uganda, Green Valley Farm has been raising
                 livestock for years, built on a simple belief: healthy animals come
@@ -63,17 +64,20 @@
 
             <div class="card-grid">
                 <div class="info-card">
-                    <h3>🐄 Quality Breeding Stock</h3>
+                    <img src="assets/card-animals.jpg" alt="Healthy breeding stock" class="card-image">
+                    <h3>Quality Breeding Stock</h3>
                     <p>Healthy, well-raised animals ready for your farm.</p>
                 </div>
 
                 <div class="info-card">
-                    <h3>🥩 Farm Products</h3>
+                    <img src="assets/card-products.jpg" alt="Fresh farm products" class="card-image">
+                    <h3>Farm Products</h3>
                     <p>Fresh, reliable supply for homes and businesses.</p>
                 </div>
 
                 <div class="info-card">
-                    <h3>🤝 Trusted Service</h3>
+                    <img src="assets/card-service.jpg" alt="Trusted service" class="card-image">
+                    <h3>Trusted Service</h3>
                     <p>Years of experience serving farmers across the region.</p>
                 </div>
             </div>

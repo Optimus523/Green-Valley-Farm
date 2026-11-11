@@ -1,5 +1,6 @@
 <?php
 
+// Make database errors throw exceptions so they can be caught with try/catch
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $host = 'localhost';

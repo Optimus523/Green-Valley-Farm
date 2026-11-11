@@ -35,13 +35,14 @@ $where_sql = !empty($where) ? ' WHERE ' . implode(' AND ', $where) : '';
 // 1. Fetch summary (COUNT, SUM, AVG)
 $summary = ['total' => 0, 'total_weight' => 0, 'avg_weight' => 0];
 $sum_sql = 'SELECT COUNT(*) AS total,
-                   SUM(weight_kg) AS total_weight,
-                   AVG(weight_kg) AS avg_weight
+                SUM(weight_kg) AS total_weight,
+                AVG(weight_kg) AS avg_weight
             FROM animals' . $where_sql;
 $stmt = $conn->prepare($sum_sql);
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
 }
+
 $stmt->execute();
 $summary = $stmt->get_result()->fetch_assoc();
 $stmt->close();
